@@ -31,3 +31,10 @@ build/
 ### VS Code ###
 .vscode/
 !/.idea/runConfigurations/
+.mvn/wrapper/
+messaging-config/src/main/resources/
+messaging-config/src/test/
+messaging-shared/src/main/resources/
+messaging-shared/src/test/
+mvnw
+mvnw.cmd
