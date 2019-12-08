@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: INFO
+    ca.purpleowl.examples: TRACE
+
+#server:
+#  port: 8085
+
+management:
+  server:
+    port: 8088
