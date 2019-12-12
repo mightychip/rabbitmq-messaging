@@ -18,13 +18,13 @@ public class ScheduledMessageSender {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Scheduled(fixedDelay = 3000L)
+//    @Scheduled(fixedDelay = 3000L)
     public void sendMessage() {
         final var message = new CustomMessage("This is a test", 420);
         sendMessage(message);
     }
 
     private void sendMessage(Serializable message) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.GENERIC_QUEUE_NAME, message);
     }
 }
