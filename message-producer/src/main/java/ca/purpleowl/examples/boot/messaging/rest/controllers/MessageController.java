@@ -23,7 +23,7 @@ public class MessageController {
     public ResponseEntity<CustomMessage> sendMessage() {
         CustomMessage message = new CustomMessage("This is a test message...", 420);
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE_NAME, RabbitMQConfig.SIMPLE_KEY, message);
         return ResponseEntity.ok(message);
     }
 

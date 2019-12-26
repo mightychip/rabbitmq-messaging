@@ -25,6 +25,7 @@ public class RabbitMQConfig {
     public static final String ROOT_TOPIC_QUEUE_NAME = "rootFanoutQueue";
     public static final String LEFT_TOPIC_QUEUE_NAME = "leftFanoutQueue";
     public static final String RIGHT_TOPIC_QUEUE_NAME = "rightFanoutQueue";
+    public static final String DIRECT_EXCHANGE_QUEUE_NAME = "directExchangeQueueName";
 
     //exchange names
     public static final String DIRECT_EXCHANGE_NAME = "exampleDirectExchange";
@@ -37,6 +38,7 @@ public class RabbitMQConfig {
     public static final String ROOT_TOPIC_KEY = "purple.owl.*";
     public static final String RIGHT_TOPIC_KEY = "purple.owl.right";
     public static final String LEFT_TOPIC_KEY = "purple.owl.left";
+    public static final String DIRECT_EXCHANGE_EXAMPLE_KEY = "direct.exchange.example";
 
     @Bean
     public DirectExchange exampleDirectExchange() {
@@ -78,6 +80,11 @@ public class RabbitMQConfig {
         return new Queue(LEFT_TOPIC_QUEUE_NAME);
     }
 
+    @Bean
+    public Queue exampleDirectExchangeQueue() {
+        return new Queue(DIRECT_EXCHANGE_QUEUE_NAME);
+    }
+
 
     @Bean
     public Binding exampleBinding() {
@@ -94,7 +101,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding rootFanoutBinding() {
+    public Binding rootTopicBinding() {
         return BindingBuilder
                 .bind(rootTopicQueue())
                 .to(exampleTopicExchange())
@@ -102,7 +109,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding rightFanoutBinding() {
+    public Binding rightTopicBinding() {
         return BindingBuilder
                 .bind(rightTopicQueue())
                 .to(exampleTopicExchange())
@@ -110,11 +117,19 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding leftFanoutBinding() {
+    public Binding leftTopicBinding() {
         return BindingBuilder
                 .bind(leftTopicQueue())
                 .to(exampleTopicExchange())
                 .with(LEFT_TOPIC_KEY);
+    }
+
+    @Bean
+    public Binding exampleDirectExchangeQueueBinding() {
+        return BindingBuilder
+                .bind(exampleDirectExchangeQueue())
+                .to(exampleDirectExchange())
+                .with(DIRECT_EXCHANGE_EXAMPLE_KEY);
     }
 
     @Bean
